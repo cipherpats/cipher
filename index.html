@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cipherpats</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #f5f7fb 0%, #edf1f9 45%, #f8f9fb 100%);
+      color: #1a2233;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(90deg, #0b1f3a 0%, #172a4d 50%, #0b1f3a 100%);
+      color: #fff;
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+    }
+
+    nav a {
+      color: #f5f7ff;
+      margin-left: 18px;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.9;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover { opacity: 1; text-decoration: underline; }
+
+    nav a.active {
+      opacity: 1;
+      border-bottom-color: rgba(255,255,255,0.9);
+      text-decoration: none;
+    }
+
+    .wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 16px 40px;
+    }
+
+    section.card {
+      background: rgba(255, 255, 255, 0.98);
+      padding: 24px 24px 26px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      border: 1px solid #e0e5f2;
+      box-shadow: 0 14px 30px rgba(15, 34, 63, 0.06);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 24px;
+      color: #0b1f3a;
+    }
+
+    h3 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #12213b;
+    }
+
+    p { line-height: 1.5; margin: 6px 0 10px; }
+    ul { padding-left: 18px; margin: 4px 0 10px; }
+
+    .note { font-size: 12px; color: #555f7a; }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      border: 1px solid #e0e5f2;
+      background: #ffffff;
+      color: #0b1f3a;
+      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: #0b1f3a;
+      border-color: #0b1f3a;
+      color: #fff;
+    }
+
+    .btn:hover { opacity: 0.95; }
+
+    a { color: #0b1f3a; }
+
+    footer {
+      background: #0b1f3a;
+      color: #fff;
+      padding: 12px 32px;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* -------- HOME (from index.html) -------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .hero-card {
+      background: #fafbff;
+      border: 1px solid #e0e5f2;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: 26px;
+      color: #0b1f3a;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-sub { margin-top: 8px; color: #33415f; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .feature {
+      background: #fafbff;
+      border: 1px solid #e0e5f2;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 14px;
+      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+    }
+
+    .feature-title { font-weight: 600; margin-bottom: 6px; color: #0b1f3a; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .step {
+      background: #fafbff;
+      border: 1px solid #e0e5f2;
+      border-radius: 10px;
+      padding: 14px;
+      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+      font-size: 14px;
+    }
+
+    .step strong {
+      color: #0b1f3a;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* -------- SERVICES (from services page) -------- */
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .pkg-card {
+      background: #fafbff;
+      border: 1px solid #e0e5f2;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 14px;
+      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+    }
+
+    .pkg-title { font-weight: 600; margin-bottom: 4px; color: #0b1f3a; }
+    .pkg-meta { font-size: 12px; color: #555f7a; margin-bottom: 6px; }
+    .pkg-price { font-size: 12px; color: #333a54; margin-top: 6px; }
+
+    /* -------- CONTACT (from contact page) -------- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .panel {
+      background: #fafbff;
+      border: 1px solid #e0e5f2;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+    }
+
+    .panel h3 { margin: 0 0 10px 0; font-size: 18px; color: #12213b; }
+
+    .row { margin: 10px 0; font-size: 14px; color: #33415f; }
+    .row strong { color: #0b1f3a; }
+
+    form { display: grid; gap: 10px; margin-top: 6px; }
+
+    label {
+      font-size: 12px;
+      color: #555f7a;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 10px;
+      border: 1px solid #d9dfef;
+      background: #fff;
+      font: inherit;
+      color: #1a2233;
+      outline: none;
+    }
+
+    textarea { min-height: 120px; resize: vertical; }
+
+    input:focus, textarea:focus {
+      border-color: #0b1f3a;
+      box-shadow: 0 0 0 3px rgba(11, 31, 58, 0.10);
+    }
+
+    /* -------- ROUTING / PAGE VISIBILITY -------- */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .packages { grid-template-columns: 1fr; }
+      header { flex-direction: column; align-items: flex-start; }
+      nav { margin-top: 8px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Cipherpats</h1>
+    <nav>
+      <a href="#home" data-route="home">Home</a>
+      <a href="#services" data-route="services">Our Services</a>
+      <a href="#contact" data-route="contact">Contact Us</a>
+    </nav>
+  </header>
+
+  <!-- HOME -->
+  <main id="page-home" class="page active">
+    <div class="wrapper">
+      <section class="card">
+        <div class="hero">
+          <div class="hero-card">
+            <h2 class="hero-title">CipherPats</h2>
+            <p class="hero-sub">
+              Cipherpats supports law firms, in-house IP teams, and innovators with structured, evidence-first research—
+              designed for fast review and clear decisions. We provides patentability and novelty support, invalidation searches,
+              infringement-risk inputs, patent landscapes, and patent–product mapping.
+            </p>
+
+            <div class="btn-row">
+              <a class="btn primary" href="#services">View Services</a>
+              <a class="btn" href="#contact">Send a Query</a>
+            </div>
+
+            <p class="note" style="margin-top:10px;">
+              Note: We provide research support and structured analysis. Legal opinions and attorney sign-off are handled by licensed counsel.
+            </p>
+          </div>
+
+          <div class="hero-card">
+            <h3 style="margin-top:0;">What you get</h3>
+            <ul>
+              <li>Clean, structured deliverables (tables + references)</li>
+              <li>Scope clarity (jurisdictions, timelines, depth)</li>
+              <li>White-label friendly collaboration</li>
+            </ul>
+            <p class="note">Typical outputs can be tailored to your format (memo / report / spreadsheet).</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>What we do</h2>
+        <p>We provide patent research and IP analysis across prosecution, pre-litigation support, and competitive intelligence.</p>
+
+        <div class="feature-grid">
+          <div class="feature">
+            <div class="feature-title">Patentability & Novelty</div>
+            Prior art searching and feature-wise comparison to help assess novelty before filing.
+          </div>
+          <div class="feature">
+            <div class="feature-title">Infringement Risk Inputs</div>
+            Identify relevant third-party rights and map claims vs product features (structured inputs).
+          </div>
+          <div class="feature">
+            <div class="feature-title">Invalidation & Landscapes</div>
+            Deep invalidation searches and landscape analysis to support strategy and positioning.
+          </div>
+        </div>
+
+        <p class="note" style="margin-top:10px;">
+          See the full list and packages on the <a href="#services">Services page</a>.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>How we work</h2>
+        <p>Simple process — designed for clarity and speed.</p>
+
+        <div class="steps">
+          <div class="step">
+            <strong>1) Scope</strong>
+            You share your invention brief / target patent(s) / product and the jurisdictions + deadline.
+          </div>
+          <div class="step">
+            <strong>2) Research</strong>
+            We execute structured searches, filter results, and compile evidence with traceability.
+          </div>
+          <div class="step">
+            <strong>3) Delivery</strong>
+            You receive a clean report (and optional mapping tables) suitable for attorney/client review.
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Contact</h2>
+        <p>
+          Email us at <a href="mailto:cipherpats@gmail.com">cipherpats@gmail.com</a> or use the <a href="#contact">Contact page</a>.
+        </p>
+        <div class="btn-row" style="margin-top:10px;">
+          <a class="btn primary" href="#contact">Go to Contact Us</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- SERVICES -->
+  <main id="page-services" class="page">
+    <div class="wrapper">
+      <section class="card">
+        <h2>Our Services</h2>
+        <p>
+          Core patent research and IP analysis services offered by Cipherpats, along with example packages.
+          All engagements are scoped individually; pricing is shared on request based on complexity, jurisdictions and timelines.
+        </p>
+        <p class="note">(Update the package descriptions and fee ranges to match your actual pricing.)</p>
+      </section>
+
+      <section class="card">
+        <h3>1. Patentability Search</h3>
+        <p>Assesses whether an invention is likely to meet novelty and inventive-step requirements before filing.</p>
+        <ul>
+          <li>Targeted prior art search in patent and non-patent literature</li>
+          <li>Feature-wise comparison vs closest prior art</li>
+          <li>Clear opinion on strengths, gaps and drafting pointers</li>
+        </ul>
+        <div class="packages">
+          <div class="pkg-card">
+            <div class="pkg-title">Patentability – Essential</div>
+            <div class="pkg-meta">For single inventions with clear claim structure.</div>
+            <ul>
+              <li>Search across major patent databases</li>
+              <li>Top 5–10 key prior art references</li>
+              <li>Feature comparison table (invention vs prior art)</li>
+              <li>Short written opinion (2–3 pages)</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (per invention)</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-title">Patentability – Enhanced</div>
+            <div class="pkg-meta">For complex inventions or multiple independent claims.</div>
+            <ul>
+              <li>Expanded search coverage (patent + non-patent literature)</li>
+              <li>Ranked prior art set with commentary</li>
+              <li>Detailed claim-chart style mapping</li>
+              <li>Recommendations for claim drafting strategy</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (per invention / per family)</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>2. Novelty Assessment</h3>
+        <p>Quick, focused novelty check on specific claims or concepts.</p>
+        <ul>
+          <li>Claim-focused searching around defined inventive features</li>
+          <li>Shortlist of closest documents with claim-feature mapping</li>
+          <li>Traffic-light style indication of novelty risk (green / amber / red)</li>
+        </ul>
+        <div class="packages">
+          <div class="pkg-card">
+            <div class="pkg-title">Novelty Check – Rapid</div>
+            <div class="pkg-meta">For early-stage concepts and inventor discussions.</div>
+            <ul>
+              <li>Single-concept search</li>
+              <li>3–5 closest prior art references</li>
+              <li>One-page risk summary</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (per concept)</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-title">Novelty Check – Detailed</div>
+            <div class="pkg-meta">For near-final claims before filing.</div>
+            <ul>
+              <li>Multiple claim variants covered</li>
+              <li>Feature mapping for each key claim</li>
+              <li>Structured summary for attorney review</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (per set of claims)</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>3. Infringement Risk Assessment</h3>
+        <p>Evaluates whether a product or process is likely to fall within the scope of third-party rights.</p>
+        <ul>
+          <li>Identification of relevant active patents in target markets</li>
+          <li>Claims vs product mapping with annotated charts</li>
+          <li>Risk categorisation and high-level design-around suggestions</li>
+        </ul>
+        <div class="packages">
+          <div class="pkg-card">
+            <div class="pkg-title">Infringement Risk – Screen</div>
+            <div class="pkg-meta">For early FTO impressions before major investment.</div>
+            <ul>
+              <li>High-level patent scan in key jurisdictions</li>
+              <li>List of potentially relevant families</li>
+              <li>Simple risk flags per family</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (per product / per market)</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-title">Infringement Risk – Detailed</div>
+            <div class="pkg-meta">For launches, licensing and due diligence.</div>
+            <ul>
+              <li>Comprehensive patent search and filtering</li>
+              <li>Claims vs product charts for key patents</li>
+              <li>Consolidated risk summary and design-around notes</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (scope-based)</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>4. Invalidation / Opposition Search</h3>
+        <p>Searches for strong prior art to challenge the validity of a granted or pending patent.</p>
+        <ul>
+          <li>Deep prior art search on independent and key dependent claims</li>
+          <li>Feature-wise mapping to identify novelty and inventive-step attacks</li>
+          <li>Structured evidence pack to support opposition or litigation teams</li>
+        </ul>
+        <div class="packages">
+          <div class="pkg-card">
+            <div class="pkg-title">Invalidation – Core</div>
+            <div class="pkg-meta">For single target patent / key claim set.</div>
+            <ul>
+              <li>Focused search around main independent claims</li>
+              <li>Shortlisted prior art with excerpts</li>
+              <li>Claim vs prior art mapping tables</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (per target patent)</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-title">Invalidation – Extended</div>
+            <div class="pkg-meta">For complex cases or multiple related patents.</div>
+            <ul>
+              <li>Broader search across families and non-patent literature</li>
+              <li>Multiple attack lines (novelty + inventive step)</li>
+              <li>Evidence pack ready for opposition/litigation strategy</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (scope-based)</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>5. Patent Landscape Analysis</h3>
+        <p>Strategic overview of patents in a technology domain, market, or competitor cluster.</p>
+        <ul>
+          <li>Custom search strategy for the defined domain</li>
+          <li>Cleaning and clustering of relevant publications</li>
+          <li>Segmentation by assignee, geography, technology and timelines</li>
+        </ul>
+        <div class="packages">
+          <div class="pkg-card">
+            <div class="pkg-title">Landscape – Snapshot</div>
+            <div class="pkg-meta">For quick strategic overviews.</div>
+            <ul>
+              <li>Domain definition and search strategy</li>
+              <li>High-level stats and charts</li>
+              <li>Key assignees and technology clusters</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (per domain)</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-title">Landscape – In-Depth</div>
+            <div class="pkg-meta">For R&amp;D and portfolio planning.</div>
+            <ul>
+              <li>Deeper clustering and sub-domain analysis</li>
+              <li>Trends over time and white-space identification</li>
+              <li>Custom deliverables (slide deck / spreadsheet + report)</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (scope-based)</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>6. Patent–Product Mapping</h3>
+        <p>Aligns product portfolios with relevant patents for risk, licensing and monetisation decisions.</p>
+        <ul>
+          <li>Mapping of product features to internal and third-party patents</li>
+          <li>Identification of gaps, overlaps and white-space</li>
+          <li>Support for licensing, cross-licensing and portfolio optimisation</li>
+        </ul>
+        <div class="packages">
+          <div class="pkg-card">
+            <div class="pkg-title">Mapping – Single Product</div>
+            <div class="pkg-meta">For key launches or flagship products.</div>
+            <ul>
+              <li>Feature breakdown of the product</li>
+              <li>Mapping to relevant patents (internal + external)</li>
+              <li>Risk and opportunity summary</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (per product)</div>
+          </div>
+          <div class="pkg-card">
+            <div class="pkg-title">Mapping – Portfolio</div>
+            <div class="pkg-meta">For multiple products / platforms.</div>
+            <ul>
+              <li>Portfolio-wide mapping matrix</li>
+              <li>Identification of coverage gaps and overlaps</li>
+              <li>Inputs for licensing and portfolio strategy</li>
+            </ul>
+            <div class="pkg-price">Pricing: On request (scope-based)</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- CONTACT -->
+  <main id="page-contact" class="page">
+    <div class="wrapper">
+      <section class="card">
+        <h2>Contact Us</h2>
+        <p>Share your requirement and we’ll get back with a clear scope and next steps.</p>
+
+        <div class="contact-grid">
+          <div class="panel">
+            <h3>Direct Contact</h3>
+            <div class="row"><strong>Email:</strong> <a href="mailto:cipherpats@gmail.com">cipherpats@gmail.com</a></div>
+            <div class="row"><strong>Response:</strong> Typically within 24–48 hours</div>
+            <p class="note" style="margin-top:10px;">
+              Tip: If you have a target patent number(s), jurisdictions, and deadline, include them in your message.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>Send a Query</h3>
+
+            <form id="contactForm">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" placeholder="Your name" required />
+              </div>
+
+              <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@company.com" required />
+              </div>
+
+              <div>
+                <label for="phone">Phone (optional)</label>
+                <input id="phone" type="text" placeholder="+91..." />
+              </div>
+
+              <div>
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Write your query..." required></textarea>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn primary" type="submit">Send Query</button>
+                <a class="btn" href="mailto:cipherpats@gmail.com">Email Directly</a>
+              </div>
+
+              <p class="note" style="margin:6px 0 0;">
+                Clicking “Send Query” opens your email app with a pre-filled message to cipherpats@gmail.com.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <span>&copy; <span id="year"></span> Cipherpats. All rights reserved.</span>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Simple hash router
+    const routes = ["home", "services", "contact"];
+    const pages = {
+      home: document.getElementById("page-home"),
+      services: document.getElementById("page-services"),
+      contact: document.getElementById("page-contact"),
+    };
+
+    function setActiveNav(route) {
+      document.querySelectorAll('nav a[data-route]').forEach(a => {
+        const isActive = a.getAttribute("data-route") === route;
+        a.classList.toggle("active", isActive);
+        if (isActive) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      });
+    }
+
+    function showRoute(route) {
+      const r = routes.includes(route) ? route : "home";
+      Object.keys(pages).forEach(k => pages[k].classList.toggle("active", k === r));
+      setActiveNav(r);
+    }
+
+    function getRouteFromHash() {
+      return (location.hash || "#home").replace("#", "").trim();
+    }
+
+    window.addEventListener("hashchange", () => showRoute(getRouteFromHash()));
+    showRoute(getRouteFromHash());
+
+    // Static-site friendly contact form: opens a pre-filled email
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const subject = encodeURIComponent("Cipherpats Website Query");
+      const body = encodeURIComponent(
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n" +
+        (phone ? "Phone: " + phone + "\n" : "") +
+        "\nMessage:\n" + message + "\n"
+      );
+
+      window.location.href = "mailto:cipherpats@gmail.com?subject=" + subject + "&body=" + body;
+    });
+  </script>
+</body>
+</html>
