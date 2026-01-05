@@ -2,654 +2,698 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Cipherpats</title>
+  <title>Cipherpats | Global IP Research & Strategy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* --- VARIABLES --- */
+    :root {
+      --primary-dark: #0f1c2e;    /* Deep Navy */
+      --primary-blue: #2A4570;    /* Corporate Blue */
+      --accent-gold: #c5a059;     /* Muted Gold */
+      --text-main: #2b2b2b;
+      --text-light: #555555;
+      --bg-light: #f8f9fc;
+      --white: #ffffff;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Manrope', sans-serif;
+    }
+
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(180deg, #f5f7fb 0%, #edf1f9 45%, #f8f9fb 100%);
-      color: #1a2233;
+      font-family: var(--font-body);
+      background-color: var(--white);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      margin-top: 0;
+      color: var(--primary-dark);
+    }
+
+    a { text-decoration: none; color: inherit; transition: color 0.3s; }
+    ul { padding-left: 20px; }
+
+    /* --- HEADER & NAV --- */
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 10;
-      background: linear-gradient(90deg, #0b1f3a 0%, #172a4d 50%, #0b1f3a 100%);
-      color: #fff;
-      padding: 12px 32px;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 50px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+      transition: all 0.4s ease;
+      background: transparent;
+      color: #fff;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: 0.04em;
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      color: var(--primary-dark);
     }
+
+    .brand {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    
+    header.scrolled .brand { color: var(--primary-dark); }
+    header.scrolled .brand span { color: var(--accent-gold); }
+
+    nav { display: flex; gap: 35px; }
 
     nav a {
-      color: #f5f7ff;
-      margin-left: 18px;
-      text-decoration: none;
       font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
       opacity: 0.9;
-      padding-bottom: 2px;
-      border-bottom: 2px solid transparent;
     }
 
-    nav a:hover { opacity: 1; text-decoration: underline; }
+    header.scrolled nav a { color: var(--primary-dark); }
+    nav a:hover, header.scrolled nav a:hover { opacity: 1; color: var(--accent-gold); }
 
-    nav a.active {
-      opacity: 1;
-      border-bottom-color: rgba(255,255,255,0.9);
-      text-decoration: none;
-    }
-
-    .wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 28px 16px 40px;
-    }
-
-    section.card {
-      background: rgba(255, 255, 255, 0.98);
-      padding: 24px 24px 26px;
-      border-radius: 14px;
-      margin-bottom: 24px;
-      border: 1px solid #e0e5f2;
-      box-shadow: 0 14px 30px rgba(15, 34, 63, 0.06);
-    }
-
-    h2 {
-      margin-top: 0;
-      font-size: 24px;
-      color: #0b1f3a;
-    }
-
-    h3 {
-      margin-top: 0;
-      font-size: 18px;
-      color: #12213b;
-    }
-
-    p { line-height: 1.5; margin: 6px 0 10px; }
-    ul { padding-left: 18px; margin: 4px 0 10px; }
-
-    .note { font-size: 12px; color: #555f7a; }
-
-    .btn-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 14px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 14px;
-      border: 1px solid #e0e5f2;
-      background: #ffffff;
-      color: #0b1f3a;
-      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
-      cursor: pointer;
-    }
-
-    .btn.primary {
-      background: #0b1f3a;
-      border-color: #0b1f3a;
-      color: #fff;
-    }
-
-    .btn:hover { opacity: 0.95; }
-
-    a { color: #0b1f3a; }
-
-    footer {
-      background: #0b1f3a;
-      color: #fff;
-      padding: 12px 32px;
-      font-size: 13px;
-      text-align: center;
-    }
-
-    /* -------- HOME (from index.html) -------- */
+    /* --- HERO SECTION (Updated with Uploaded Image) --- */
     .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 16px;
-      align-items: stretch;
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      
+      /* Updated Background Image */
+      background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      background-color: #0f1c2e; /* Fallback */
     }
 
-    .hero-card {
-      background: #fafbff;
-      border: 1px solid #e0e5f2;
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+    /* 1. Animated Mesh Gradient Layer - Adjusted opacity to show image better */
+    .hero-bg-mesh {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(-45deg, rgba(15, 28, 46, 0.8), rgba(28, 58, 99, 0.6), rgba(11, 22, 36, 0.8), rgba(43, 76, 126, 0.6));
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      z-index: 0;
+      
+      /* Changed to overlay so the image details pop through */
+      mix-blend-mode: overlay; 
+      opacity: 0.6; 
+    }
+
+    /* 2. Floating Orbs (The "Nano" Particles) */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+      animation: floatOrb 20s infinite alternate;
+      z-index: 1;
+    }
+    .orb-1 {
+      width: 400px; height: 400px;
+      background: rgba(42, 69, 112, 0.4);
+      top: -10%; left: -10%;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      background: rgba(197, 160, 89, 0.15); /* Gold tint */
+      bottom: -10%; right: -10%;
+      animation-delay: -5s;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: rgba(255, 255, 255, 0.05);
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation-duration: 25s;
+    }
+
+    /* 3. Dark Overlay for Text Readability */
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at center, transparent 0%, rgba(15, 28, 46, 0.85) 100%);
+      z-index: 2;
+    }
+
+    /* 4. Content Content */
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 950px;
+      padding: 0 20px;
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    /* Glass Card Effect behind text */
+    .hero-glass-card {
+      background: rgba(15, 28, 46, 0.65); /* Increased darkness for contrast against the bright image center */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 60px 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
     }
 
     .hero-title {
-      margin: 0;
-      font-size: 26px;
-      color: #0b1f3a;
-      letter-spacing: 0.01em;
+      font-size: 4.0rem;
+      margin-bottom: 22px;
+      line-height: 1.5;
+      color: #ffffff;
+      /* Gradient Text Effect */
+      background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #c5a059 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.2); 
     }
 
-    .hero-sub { margin-top: 8px; color: #33415f; }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 10px;
+    .hero-sub {
+      font-size: 1.25rem;
+      margin-bottom: 40px;
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 300;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
     }
 
-    .feature {
-      background: #fafbff;
-      border: 1px solid #e0e5f2;
-      border-radius: 10px;
-      padding: 14px;
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      opacity: 0.7;
+      animation: bounce 2s infinite;
+    }
+    .mouse {
+      width: 26px; height: 40px;
+      border: 2px solid rgba(255,255,255,0.6);
+      border-radius: 20px;
+      position: relative;
+    }
+    .wheel {
+      width: 4px; height: 8px;
+      background: #fff;
+      border-radius: 2px;
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      animation: scrollWheel 1.5s infinite;
+    }
+
+    /* --- ANIMATION KEYFRAMES --- */
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(40px, -40px); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+      40% {transform: translateX(-50%) translateY(-10px);}
+      60% {transform: translateX(-50%) translateY(-5px);}
+    }
+    @keyframes scrollWheel {
+      0% { opacity: 1; top: 6px; }
+      100% { opacity: 0; top: 18px; }
+    }
+
+    /* --- BUTTONS --- */
+    .btn {
+      display: inline-block;
+      padding: 16px 38px;
       font-size: 14px;
-      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+      text-decoration: none;
     }
 
-    .feature-title { font-weight: 600; margin-bottom: 6px; color: #0b1f3a; }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 10px;
+    .btn.primary {
+      background-color: var(--accent-gold);
+      color: var(--primary-dark);
+      box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+    }
+    .btn.primary:hover {
+      background-color: #d4af66;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(197, 160, 89, 0.5);
     }
 
-    .step {
-      background: #fafbff;
-      border: 1px solid #e0e5f2;
-      border-radius: 10px;
-      padding: 14px;
-      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
-      font-size: 14px;
+    .btn.outline {
+      border-color: rgba(255,255,255,0.4);
+      color: #fff;
+      margin-left: 15px;
+      background: rgba(255,255,255,0.02);
+    }
+    .btn.outline:hover {
+      background-color: rgba(255,255,255,0.1);
+      border-color: #fff;
+      transform: translateY(-2px);
     }
 
-    .step strong {
-      color: #0b1f3a;
-      display: block;
-      margin-bottom: 6px;
-    }
+    /* --- SECTIONS & LAYOUT --- */
+    .wrapper { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+    .bg-light { background-color: var(--bg-light); }
+    .divider { height: 4px; width: 70px; background-color: var(--accent-gold); margin: 0 auto 25px; }
+    .section-header { text-align: center; margin-bottom: 70px; }
+    .section-header h2 { font-size: 2.8rem; margin-bottom: 20px; }
+    .section-header p { font-size: 1.1rem; color: var(--text-light); max-width: 600px; margin: 0 auto; }
 
-    /* -------- SERVICES (from services page) -------- */
-    .packages {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 10px;
+    /* Feature Cards */
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+    .feature-card {
+      background: #fff; padding: 50px 40px; border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s;
+      border-bottom: 3px solid transparent; opacity: 0; /* FadeIn handled by JS */
     }
+    .feature-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-bottom-color: var(--accent-gold); }
+    .feature-icon { font-size: 36px; color: var(--primary-blue); margin-bottom: 25px; }
+    .feature-card h3 { font-size: 1.6rem; margin-bottom: 15px; }
 
+    /* Services & Contact (Standardized) */
+    .service-row { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 100px; align-items: start; opacity: 0; }
+    .service-info h3 { font-size: 2.2rem; margin-bottom: 20px; }
+    .pkg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     .pkg-card {
-      background: #fafbff;
-      border: 1px solid #e0e5f2;
-      border-radius: 10px;
-      padding: 14px;
-      font-size: 14px;
-      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+      background: #fff; padding: 30px; border: 1px solid #eef0f5;
+      border-radius: 6px; box-shadow: 0 5px 20px rgba(0,0,0,0.03); transition: 0.3s;
+    }
+    .pkg-card:hover { border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .pkg-title { font-weight: 700; margin-bottom: 8px; color: var(--primary-dark); }
+    .pkg-price { color: var(--accent-gold); font-weight: 700; display: block; margin-top: 20px; }
+
+    .contact-wrapper { background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.5fr; opacity: 0; }
+    .contact-sidebar { background: var(--primary-dark); padding: 60px; color: #fff; }
+    .contact-form-section { padding: 60px; }
+    input, textarea { width: 100%; padding: 18px; border: 1px solid #e0e0e0; background: #fcfcfc; border-radius: 4px; margin-bottom: 20px; font-family: inherit; }
+    input:focus, textarea:focus { outline: none; border-color: var(--primary-dark); box-shadow: 0 0 0 4px rgba(15, 28, 46, 0.05); }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary-dark);
+      color: #fff;
+      padding: 0;
+      position: relative;
+      font-size: 0.95rem;
+      overflow: hidden;
     }
 
-    .pkg-title { font-weight: 600; margin-bottom: 4px; color: #0b1f3a; }
-    .pkg-meta { font-size: 12px; color: #555f7a; margin-bottom: 6px; }
-    .pkg-price { font-size: 12px; color: #333a54; margin-top: 6px; }
+    .footer-border {
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-dark) 0%, var(--accent-gold) 50%, var(--primary-dark) 100%);
+      width: 100%;
+    }
 
-    /* -------- CONTACT (from contact page) -------- */
-    .contact-grid {
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px 60px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 12px;
+      grid-template-columns: 1.5fr 0.8fr 1fr 1.2fr;
+      gap: 50px;
     }
 
-    .panel {
-      background: #fafbff;
-      border: 1px solid #e0e5f2;
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 8px 18px rgba(15, 34, 63, 0.05);
+    .footer-col h4 {
+      color: #fff;
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-family: var(--font-body);
     }
 
-    .panel h3 { margin: 0 0 10px 0; font-size: 18px; color: #12213b; }
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .footer-logo span { color: var(--accent-gold); }
 
-    .row { margin: 10px 0; font-size: 14px; color: #33415f; }
-    .row strong { color: #0b1f3a; }
+    .footer-desc {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      margin-bottom: 25px;
+      max-width: 300px;
+    }
 
-    form { display: grid; gap: 10px; margin-top: 6px; }
-
-    label {
-      font-size: 12px;
-      color: #555f7a;
-      font-weight: 600;
-      margin-bottom: 4px;
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: 15px; }
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      transition: all 0.3s ease;
       display: inline-block;
     }
-
-    input, textarea {
-      width: 100%;
-      padding: 11px 12px;
-      border-radius: 10px;
-      border: 1px solid #d9dfef;
-      background: #fff;
-      font: inherit;
-      color: #1a2233;
-      outline: none;
+    .footer-links a:hover {
+      color: var(--accent-gold);
+      transform: translateX(5px);
     }
 
-    textarea { min-height: 120px; resize: vertical; }
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 18px;
+      color: rgba(255,255,255,0.7);
+    }
+    .contact-row i {
+      color: var(--accent-gold);
+      margin-top: 5px;
+    }
+    .contact-row a:hover { color: #fff; text-decoration: underline; }
 
-    input:focus, textarea:focus {
-      border-color: #0b1f3a;
-      box-shadow: 0 0 0 3px rgba(11, 31, 58, 0.10);
+    .social-links { display: flex; gap: 15px; }
+    .social-links a {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      transition: 0.3s;
+      color: #fff;
+    }
+    .social-links a:hover {
+      background: var(--accent-gold);
+      color: var(--primary-dark);
+      transform: translateY(-3px);
     }
 
-    /* -------- ROUTING / PAGE VISIBILITY -------- */
-    .page { display: none; }
-    .page.active { display: block; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 25px 20px;
+      background: rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .copyright, .legal-links a {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+    }
+    .legal-links { display: flex; gap: 20px; }
+    .legal-links a:hover { color: var(--accent-gold); }
 
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .feature-grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 600px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 15px; }
     }
 
-    @media (max-width: 768px) {
-      .packages { grid-template-columns: 1fr; }
-      header { flex-direction: column; align-items: flex-start; }
-      nav { margin-top: 8px; }
+    /* Page Routing */
+    .page { display: none; padding-top: 85px; }
+    .page.active { display: block; }
+    #page-home { padding-top: 0; }
+
+    @media (max-width: 900px) {
+      .hero-title { font-size: 3rem; }
+      .contact-wrapper, .service-row { grid-template-columns: 1fr; }
+      .pkg-grid { grid-template-columns: 1fr; }
     }
+    @media (max-width: 768px) {
+      header { padding: 15px 20px; }
+      nav { display: none; }
+    }
+    
+    .fade-in-active { animation: fadeInUp 0.8s ease-out forwards; }
   </style>
 </head>
 
 <body>
-  <header>
-    <h1>Cipherpats</h1>
+
+  <header id="main-header">
+    <div class="brand">Cipher<span>Pats</span></div>
     <nav>
       <a href="#home" data-route="home">Home</a>
-      <a href="#services" data-route="services">Our Services</a>
-      <a href="#contact" data-route="contact">Contact Us</a>
+      <a href="#services" data-route="services">Expertise</a>
+      <a href="#contact" data-route="contact">Contact</a>
     </nav>
   </header>
 
-  <!-- HOME -->
   <main id="page-home" class="page active">
-    <div class="wrapper">
-      <section class="card">
-        <div class="hero">
-          <div class="hero-card">
-            <h2 class="hero-title">CipherPats</h2>
-            <p class="hero-sub">
-              Cipherpats supports law firms, in-house IP teams, and innovators with structured, evidence-first research—
-              designed for fast review and clear decisions. We provides patentability and novelty support, invalidation searches,
-              infringement-risk inputs, patent landscapes, and patent–product mapping.
-            </p>
+    
+    <div class="hero">
+      <div class="hero-bg-mesh"></div>
+      
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      
+      <div class="hero-overlay"></div>
 
-            <div class="btn-row">
-              <a class="btn primary" href="#services">View Services</a>
-              <a class="btn" href="#contact">Send a Query</a>
-            </div>
-
-            <p class="note" style="margin-top:10px;">
-              Note: We provide research support and structured analysis. Legal opinions and attorney sign-off are handled by licensed counsel.
-            </p>
-          </div>
-
-          <div class="hero-card">
-            <h3 style="margin-top:0;">What you get</h3>
-            <ul>
-              <li>Clean, well-structured deliverables</li>
-              <li>Scope clarity (jurisdictions, timelines, depth)</li>
-              <li>White-label friendly collaboration</li>
-            </ul>
-            <p class="note">Typical outputs can be tailored to your format (memo / report / spreadsheet).</p>
+      <div class="hero-content">
+        <div class="hero-glass-card">
+          <h1 class="hero-title">Precision in Patent Strategy.</h1>
+          <p class="hero-sub">
+            We bridge the gap between technical complexity and legal strategy with structured, evidence-first research.
+          </p>
+          <div style="margin-top: 30px;">
+            <a class="btn primary" href="#services">Our Expertise</a>
+            <a class="btn outline" href="#contact">Get in Touch</a>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="card">
-        <h2>What we do</h2>
-        <p>We provide patent research and IP analysis across prosecution, pre-litigation support, and competitive intelligence.</p>
-
-        <div class="feature-grid">
-          <div class="feature">
-            <div class="feature-title">Patentability & Novelty</div>
-            Prior art searching and feature-wise comparison to help assess novelty before filing.
-          </div>
-          <div class="feature">
-            <div class="feature-title">Infringement Risk Inputs</div>
-            Identify relevant third-party rights and map claims vs product features (structured inputs).
-          </div>
-          <div class="feature">
-            <div class="feature-title">Invalidation & Landscapes</div>
-            Deep invalidation searches and landscape analysis to support strategy and positioning.
-          </div>
+      <div class="scroll-indicator">
+        <div class="mouse">
+          <div class="wheel"></div>
         </div>
+      </div>
+    </div>
 
-        <p class="note" style="margin-top:10px;">
-          See the full list and packages on the <a href="#services">Services page</a>.
-        </p>
-      </section>
+    <div class="wrapper bg-light">
+      <div class="section-header fade-in">
+        <div class="divider"></div>
+        <h2>Why Cipherpats?</h2>
+        <p>Advanced intelligence for the modern IP landscape.</p>
+      </div>
 
-      <section class="card">
-        <h2>How we work</h2>
-        <p>Simple process — designed for clarity and speed.</p>
-
-        <div class="steps">
-          <div class="step">
-            <strong>1) Scope</strong>
-            You provide an invention brief, the target patent(s) or product, the relevant jurisdictions, and your deadline.
-          </div>
-          <div class="step">
-            <strong>2) Research</strong>
-            We execute structured searches, filter results, and compile evidence with traceability.
-          </div>
-          <div class="step">
-            <strong>3) Delivery</strong>
-            You receive a clean report (and optional mapping tables) suitable for the attorney/client review.
-          </div>
+      <div class="feature-grid">
+        <div class="feature-card fade-in">
+          <i class="fa-solid fa-microscope feature-icon"></i>
+          <h3>Evidence First</h3>
+          <p>We don't just search; we analyze. Our outputs provide direct evidence for novelty, invalidity, or infringement arguments.</p>
         </div>
-      </section>
-
-      <section class="card">
-        <h2>Contact</h2>
-        <p>
-          Email us at <a href="mailto:cipherpats@gmail.com">cipherpats@gmail.com</a> or use the <a href="#contact">Contact page</a>.
-        </p>
-        <div class="btn-row" style="margin-top:10px;">
-          <a class="btn primary" href="#contact">Go to Contact Us</a>
+        <div class="feature-card fade-in">
+          <i class="fa-solid fa-crosshairs feature-icon"></i>
+          <h3>Scope Clarity</h3>
+          <p>Clear timelines, defined jurisdictions, and transparent depth. You get exactly what you need to advise clients effectively.</p>
         </div>
-      </section>
+        <div class="feature-card fade-in">
+          <i class="fa-solid fa-file-shield feature-icon"></i>
+          <h3>White-Label Ready</h3>
+          <p>Our reports are clean, professional, and unbranded by default, allowing seamless integration into your firm's workflow.</p>
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- SERVICES -->
   <main id="page-services" class="page">
+    <div style="background: var(--primary-dark); color:#fff; padding: 120px 20px 80px; text-align:center;">
+      <h1 style="color:#fff; font-size:3.5rem;">Our Expertise</h1>
+      <p style="opacity:0.8; max-width:600px; margin:0 auto; font-size:1.2rem;">Comprehensive patent research tailored for prosecution and litigation.</p>
+    </div>
+
     <div class="wrapper">
-      <section class="card">
-        <h2>Our Services</h2>
-        <p>
-          Core patent research and IP analysis services offered by Cipherpats, along with example packages.
-          All engagements are scoped individually; pricing is shared on request based on complexity, jurisdictions and timelines.
-        </p>
-        <p class="note">(Update the package descriptions and fee ranges to match your actual pricing.)</p>
-      </section>
-
-      <section class="card">
-        <h3>1. Patentability Search</h3>
-        <p>Assesses whether an invention is likely to meet novelty and inventive-step requirements before filing.</p>
-        <ul>
-          <li>Targeted prior art search in patent and non-patent literature</li>
-          <li>Feature-wise comparison vs closest prior art</li>
-          <li>Clear opinion on strengths, gaps and drafting pointers</li>
-        </ul>
-        <div class="packages">
+      <div class="service-row fade-in">
+        <div class="service-info">
+          <h3>Patentability Search</h3>
+          <p>Assess whether an invention meets novelty and inventive-step requirements before filing. We minimize rejection risks by identifying the closest prior art early.</p>
+          <ul>
+            <li>Targeted searching in patent & non-patent literature</li>
+            <li>Feature-wise comparison vs. prior art</li>
+            <li>Drafting pointers to overcome identified art</li>
+          </ul>
+        </div>
+        <div class="pkg-grid">
           <div class="pkg-card">
-            <div class="pkg-title">Patentability – Essential</div>
-            <div class="pkg-meta">For single inventions with clear claim structure.</div>
-            <ul>
-              <li>Search across major patent databases</li>
-              <li>Top 5–10 key prior art references</li>
-              <li>Feature comparison table (invention vs prior art)</li>
-              <li>Short written opinion (2–3 pages)</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (per invention)</div>
+            <div class="pkg-title">Essential</div>
+            <p style="font-size:0.9rem; color:#666;">Top 5–10 references, feature comparison table, and a short written opinion.</p>
+            <span class="pkg-price">Pricing on Request</span>
           </div>
           <div class="pkg-card">
-            <div class="pkg-title">Patentability – Enhanced</div>
-            <div class="pkg-meta">For complex inventions or multiple independent claims.</div>
-            <ul>
-              <li>Expanded search coverage (patent & non-patent literature)</li>
-              <li>Ranked prior art set with commentary</li>
-              <li>Detailed claim-chart style mapping</li>
-              <li>Recommendations for claim drafting strategy</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (per invention / per family)</div>
+            <div class="pkg-title">Enhanced</div>
+            <p style="font-size:0.9rem; color:#666;">Ranked prior art, detailed claim charts, and strategic drafting recommendations.</p>
+            <span class="pkg-price">Pricing on Request</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="card">
-        <h3>2. Novelty Assessment</h3>
-        <p>Quick, focused novelty check on specific claims or concepts.</p>
-        <ul>
-          <li>Claim-focused searching around defined inventive features</li>
-          <li>Shortlist of closest documents with claim-feature mapping</li>
-          <li>Traffic-light style indication of novelty risk (green / amber / red)</li>
-        </ul>
-        <div class="packages">
+      <div class="divider"></div>
+
+      <div class="service-row fade-in">
+        <div class="service-info">
+          <h3>Freedom to Operate (FTO)</h3>
+          <p>Evaluate infringement risks before product launch. We identify active patents in your target markets and map claims to your product features.</p>
+          <ul>
+            <li>Identification of high-risk active patents</li>
+            <li>Claims vs. Product annotated charts</li>
+            <li>Design-around suggestions</li>
+          </ul>
+        </div>
+        <div class="pkg-grid">
           <div class="pkg-card">
-            <div class="pkg-title">Novelty Check – Rapid</div>
-            <div class="pkg-meta">For early-stage concepts and inventor discussions.</div>
-            <ul>
-              <li>Single-concept search</li>
-              <li>3–5 closest prior art references</li>
-              <li>One-page risk summary</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (per concept)</div>
+            <div class="pkg-title">FTO Screen</div>
+            <p style="font-size:0.9rem; color:#666;">High-level patent scan in key jurisdictions with simple risk flags.</p>
+            <span class="pkg-price">Pricing on Request</span>
           </div>
           <div class="pkg-card">
-            <div class="pkg-title">Novelty Check – Detailed</div>
-            <div class="pkg-meta">For near-final claims before filing.</div>
-            <ul>
-              <li>Multiple claim variants covered</li>
-              <li>Feature mapping for each key claim</li>
-              <li>Structured summary for attorney review</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (per set of claims)</div>
+            <div class="pkg-title">Detailed FTO</div>
+            <p style="font-size:0.9rem; color:#666;">Comprehensive filtering, detailed charts, and consolidated risk summary.</p>
+            <span class="pkg-price">Pricing on Request</span>
           </div>
         </div>
-      </section>
-
-      <section class="card">
-        <h3>3. Infringement Risk Assessment</h3>
-        <p>Evaluates whether a product or process is likely to fall within the scope of third-party rights.</p>
-        <ul>
-          <li>Identification of relevant active patents in target markets</li>
-          <li>Claims vs product mapping with annotated charts</li>
-          <li>Risk categorisation and high-level design-around suggestions</li>
-        </ul>
-        <div class="packages">
-          <div class="pkg-card">
-            <div class="pkg-title">Infringement Risk – Screen</div>
-            <div class="pkg-meta">For early FTO impressions before major investment.</div>
-            <ul>
-              <li>High-level patent scan in key jurisdictions</li>
-              <li>List of potentially relevant families</li>
-              <li>Simple risk flags per family</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (per product / per market)</div>
-          </div>
-          <div class="pkg-card">
-            <div class="pkg-title">Infringement Risk – Detailed</div>
-            <div class="pkg-meta">For launches, licensing and due diligence.</div>
-            <ul>
-              <li>Comprehensive patent search and filtering</li>
-              <li>Claims vs product charts for key patents</li>
-              <li>Consolidated risk summary and design-around notes</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (scope-based)</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card">
-        <h3>4. Invalidation Search</h3>
-        <p>Identifies strong prior art to challenge a patent’s novelty and inventive step for litigation or post-grant proceedings.</p>
-        <ul>
-          <li>Deep prior art search on independent and key dependent claims</li>
-          <li>Feature-wise mapping to identify novelty and inventive-step attacks</li>
-          <li>Structured evidence pack to support opposition or litigation teams</li>
-        </ul>
-        <div class="packages">
-          <div class="pkg-card">
-            <div class="pkg-title">Invalidation – Core</div>
-            <div class="pkg-meta">For single target patent / key claim set.</div>
-            <ul>
-              <li>Focused search around main independent claims</li>
-              <li>Shortlisted prior art with excerpts</li>
-              <li>Claim vs prior art mapping tables</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (per target patent)</div>
-          </div>
-          <div class="pkg-card">
-            <div class="pkg-title">Invalidation – Extended</div>
-            <div class="pkg-meta">For complex cases or multiple related patents.</div>
-            <ul>
-              <li>Broader search across families and non-patent literature</li>
-              <li>Multiple attack lines (novelty or inventive step)</li>
-              <li>Evidence pack ready for litigation strategy</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (scope-based)</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card">
-        <h3>5. Patent Landscape Analysis</h3>
-        <p>Strategic overview of patents in a technology domain, market, or competitor cluster.</p>
-        <ul>
-          <li>Custom search strategy for the defined domain</li>
-          <li>Cleaning and clustering of relevant publications</li>
-          <li>Segmentation by assignee, geography, technology and timelines</li>
-        </ul>
-        <div class="packages">
-          <div class="pkg-card">
-            <div class="pkg-title">Landscape – Snapshot</div>
-            <div class="pkg-meta">For quick strategic overviews.</div>
-            <ul>
-              <li>Domain definition and search strategy</li>
-              <li>High-level stats and charts</li>
-              <li>Key assignees and technology clusters</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (per domain)</div>
-          </div>
-          <div class="pkg-card">
-            <div class="pkg-title">Landscape – In-Depth</div>
-            <div class="pkg-meta">For R&amp;D and portfolio planning.</div>
-            <ul>
-              <li>Deeper clustering and sub-domain analysis</li>
-              <li>Trends over time and white-space identification</li>
-              <li>Custom deliverables (slide deck / spreadsheet & report)</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (scope-based)</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card">
-        <h3>6. Patent–Product Mapping</h3>
-        <p>Aligns product portfolios with relevant patents for risk, licensing and monetisation decisions.</p>
-        <ul>
-          <li>Mapping of product features to internal and third-party patents</li>
-          <li>Identification of gaps, overlaps and white-space</li>
-          <li>Support for licensing, cross-licensing and portfolio optimisation</li>
-        </ul>
-        <div class="packages">
-          <div class="pkg-card">
-            <div class="pkg-title">Mapping – Single Product</div>
-            <div class="pkg-meta">For key launches or flagship products.</div>
-            <ul>
-              <li>Feature breakdown of the product</li>
-              <li>Mapping to relevant patents (internal & external)</li>
-              <li>Risk and opportunity summary</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (per product)</div>
-          </div>
-          <div class="pkg-card">
-            <div class="pkg-title">Mapping – Portfolio</div>
-            <div class="pkg-meta">For multiple products / platforms.</div>
-            <ul>
-              <li>Portfolio-wide mapping matrix</li>
-              <li>Identification of coverage gaps and overlaps</li>
-              <li>Inputs for licensing and portfolio strategy</li>
-            </ul>
-            <div class="pkg-price">Pricing: On request (scope-based)</div>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   </main>
 
-  <!-- CONTACT -->
   <main id="page-contact" class="page">
+    <div style="background: var(--primary-dark); color:#fff; padding: 120px 20px 80px; text-align:center;">
+      <h1 style="color:#fff; font-size:3.5rem;">Contact Us</h1>
+      <p style="opacity:0.8; max-width:600px; margin:0 auto; font-size:1.2rem;">Share your requirements and we will define the scope.</p>
+    </div>
+
     <div class="wrapper">
-      <section class="card">
-        <h2>Contact Us</h2>
-        <p>Share your requirement and we’ll get back with a clear scope and next steps.</p>
-
-        <div class="contact-grid">
-          <div class="panel">
-            <h3>Direct Contact</h3>
-            <div class="row"><strong>Email:</strong> <a href="mailto:cipherpats@gmail.com">cipherpats@gmail.com</a></div>
-            <div class="row"><strong>Response:</strong> Typically within 4-5 hours</div>
-            <p class="note" style="margin-top:10px;">
-              Tip: If you have a target patent number(s), jurisdictions, and deadline, include them in your message.
-            </p>
+      <div class="contact-wrapper fade-in">
+        <div class="contact-sidebar">
+          <div class="info-group">
+            <h4>Email Us</h4>
+            <a href="mailto:cipherpats@gmail.com">cipherpats@gmail.com</a>
           </div>
-
-          <div class="panel">
-            <h3>Send a Query</h3>
-
-            <form id="contactForm">
-              <div>
-                <label for="name">Name</label>
-                <input id="name" type="text" placeholder="Your name" required />
-              </div>
-
-              <div>
-                <label for="email">Email</label>
-                <input id="email" type="email" placeholder="you@company.com" required />
-              </div>
-
-              <div>
-                <label for="phone">Phone (optional)</label>
-                <input id="phone" type="text" placeholder="+91..." />
-              </div>
-
-              <div>
-                <label for="message">Message</label>
-                <textarea id="message" placeholder="Write your query..." required></textarea>
-              </div>
-
-              <div class="btn-row">
-                <button class="btn primary" type="submit">Send Query</button>
-                <a class="btn" href="mailto:cipherpats@gmail.com">Email Directly</a>
-              </div>
-
-              <p class="note" style="margin:6px 0 0;">
-                Clicking “Send Query” opens your email app with a pre-filled message to cipherpats@gmail.com.
-              </p>
-            </form>
+          <div class="info-group">
+            <h4>Response Time</h4>
+            <p>Typically within 4 hours</p>
           </div>
         </div>
-      </section>
+
+        <div class="contact-form-section">
+          <form id="contactForm">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" type="text" placeholder="John Doe" required />
+            </div>
+            <div>
+              <label for="email">Work Email</label>
+              <input id="email" type="email" placeholder="j.doe@firm.com" required />
+            </div>
+            <div>
+              <label for="message">How can we help?</label>
+              <textarea id="message" rows="5" placeholder="Describe your requirement..." required></textarea>
+            </div>
+            <button class="btn primary" type="submit" style="width:100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
     </div>
   </main>
 
-  <footer>
-    <span>&copy; <span id="year"></span> Cipherpats. All rights reserved.</span>
+ <footer>
+    <div class="footer-border"></div>
+
+    <div class="footer-grid">
+      <div class="footer-col brand-col">
+        <div class="footer-logo">Cipher<span>Pats</span></div>
+        <p class="footer-desc">
+          Providing structured, evidence-based patent research for the world's leading innovators and legal teams.
+        </p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/rhiti-mitra-a69391225/"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="mailto:cipherpats@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="#home" onclick="showRoute('home')">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact" onclick="showRoute('contact')">Get a Quote</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Expertise</h4>
+        <ul class="footer-links">
+          <li><a href="#services" onclick="showRoute('services')">Patentability Search</a></li>
+          <li><a href="#services" onclick="showRoute('services')">Freedom to Operate</a></li>
+          <li><a href="#services" onclick="showRoute('services')">Invalidation Search</a></li>
+          <li><a href="#services" onclick="showRoute('services')">Landscape Analysis</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="contact-row">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Kolkata, India</span>
+        </div>
+        <div class="contact-row">
+          <i class="fa-solid fa-envelope"></i>
+          <a href="mailto:cipherpats@gmail.com">cipherpats@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <i class="fa-solid fa-clock"></i>
+          <span>Mon - Fri: 9:00 - 18:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="copyright">
+        &copy; <span id="year"></span> Cipherpats. All rights reserved.
+      </div>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
   </footer>
-
   <script>
-    // Footer year
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Simple hash router
+    // --- Routing ---
     const routes = ["home", "services", "contact"];
     const pages = {
       home: document.getElementById("page-home"),
@@ -661,15 +705,17 @@
       document.querySelectorAll('nav a[data-route]').forEach(a => {
         const isActive = a.getAttribute("data-route") === route;
         a.classList.toggle("active", isActive);
-        if (isActive) a.setAttribute("aria-current", "page");
-        else a.removeAttribute("aria-current");
       });
+      window.scrollTo(0,0);
     }
 
     function showRoute(route) {
       const r = routes.includes(route) ? route : "home";
-      Object.keys(pages).forEach(k => pages[k].classList.toggle("active", k === r));
+      Object.keys(pages).forEach(k => {
+        pages[k].classList.toggle("active", k === r);
+      });
       setActiveNav(r);
+      window.dispatchEvent(new Event('scroll'));
     }
 
     function getRouteFromHash() {
@@ -679,27 +725,41 @@
     window.addEventListener("hashchange", () => showRoute(getRouteFromHash()));
     showRoute(getRouteFromHash());
 
-    // Static-site friendly contact form: opens a pre-filled email
+    // --- Header Scroll Effect ---
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+      const isHome = document.getElementById('page-home').classList.contains('active');
+      if (!isHome || window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // --- Footer Year ---
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // --- Form Logic ---
     document.getElementById("contactForm").addEventListener("submit", function (e) {
       e.preventDefault();
-
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
       const message = document.getElementById("message").value.trim();
+      window.location.href = `mailto:cipherpats@gmail.com?subject=Query from ${name}&body=${encodeURIComponent(message)}`;
+    });
 
-      const subject = encodeURIComponent("Cipherpats Website Query");
-      const body = encodeURIComponent(
-        "Name: " + name + "\n" +
-        "Email: " + email + "\n" +
-        (phone ? "Phone: " + phone + "\n" : "") +
-        "\nMessage:\n" + message + "\n"
-      );
-
-      window.location.href = "mailto:cipherpats@gmail.com?subject=" + subject + "&body=" + body;
+    // --- Fade In Animation ---
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in-active');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.fade-in, .contact-wrapper, .service-row, .feature-card').forEach((el) => {
+      observer.observe(el);
     });
   </script>
 </body>
 </html>
-
-
