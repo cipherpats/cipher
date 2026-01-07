@@ -325,11 +325,54 @@
     .pkg-title { font-weight: 700; margin-bottom: 8px; color: var(--primary-dark); }
     .pkg-price { color: var(--accent-gold); font-weight: 700; display: block; margin-top: 20px; }
 
-    .contact-wrapper { background: #fff; box-shadow: 0 20px 60px rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.5fr; opacity: 0; }
-    .contact-sidebar { background: var(--accent-gold); padding: 60px; color: #fff; }
-    .contact-form-section { padding: 60px; }
-    input, textarea { width: 100%; padding: 18px; border: 1px solid #e0e0e0; background: #fcfcfc; border-radius: 4px; margin-bottom: 20px; font-family: inherit; }
-    input:focus, textarea:focus { outline: none; border-color: var(--primary-dark); box-shadow: 0 0 0 4px rgba(15, 28, 46, 0.05); }
+    .contact-wrapper {
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  opacity: 0;
+}
+
+.contact-sidebar {
+  background: var(--primary-dark);
+  padding: 60px;
+  color: #fff;
+}
+
+.contact-form-section { padding: 60px; }
+
+input, textarea {
+  width: 100%;
+  padding: 18px;
+  border: 1px solid #e0e0e0;
+  background: #fcfcfc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-family: inherit;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-dark);
+  box-shadow: 0 0 0 4px rgba(15, 28, 46, 0.05);
+}
+
+/* ✅ Make "Email Us" + "Response Time" white (covers common heading tags) */
+.contact-sidebar h2,
+.contact-sidebar h3,
+.contact-sidebar h4,
+.contact-sidebar .label {
+  color: #fff;
+}
+
+/* ✅ Add ~two-line space between "cipherpats@gmail.com" and "Response Time" */
+.contact-sidebar a[href^="mailto:"] {
+  display: inline-block;
+  margin-bottom: 2em;
+}
+
 
     /* Footer */
     footer {
@@ -845,5 +888,6 @@
   </script>
 </body>
 </html>
+
 
 
